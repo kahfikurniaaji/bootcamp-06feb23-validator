@@ -6,21 +6,19 @@ const readline = require('readline').createInterface({
 
 readline.question('Nama : ', name => {
     readline.question('No HP : ', phone => {
-        if (!validator.isMobilePhone(phone, 'id-ID')) {
-            readline.close();
+        if (validator.isMobilePhone(phone, 'id-ID')) {
+            readline.question('Email : ', email => {
+                if (validator.isEmail(email)) {
+                    console.log(`Nama Saya ${name}`);
+                    console.log(`No HP Saya ${phone}`);
+                    console.log(`Email Saya ${email}`);
+                } else {
+                    console.log(`Email tidak valid!`);
+                }
+            });
+        } else {
             console.log(`No HP tidak valid!`);
-            return;
         }
-        readline.question('Email : ', email => {
-            if (!validator.isEmail(email)) {
-                readline.close();
-                console.log(`Email tidak valid!`);
-                return;
-            }
-            console.log(`Nama Saya ${name}`);
-            console.log(`No HP Saya ${phone}`);
-            console.log(`Email Saya ${email}`);
-            readline.close();
-        });
+        readline.close();
     });
 });
